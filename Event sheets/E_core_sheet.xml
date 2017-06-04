@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>E_core_sheet</name>
+    <events>
+        <include>E_noise_system</include>
+        <include>E_arrays_and_dictionaries</include>
+        <include>E_spawn_point</include>
+        <include>E_character_movement</include>
+    </events>
+</c2eventsheet>

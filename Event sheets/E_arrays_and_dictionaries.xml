@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>E_arrays_and_dictionaries</name>
+    <events>
+        <event-block sid="776913005181500">
+            <conditions>
+                <condition id="4" name="Is empty" sid="108109145240275" type="dic_Player_Charectristics" />
+            </conditions>
+            <actions>
+                <action id="0" name="Add key" sid="208165122623932" type="dic_Player_Charectristics">
+                    <param id="0" name="Key">&quot;Player_Speed&quot;</param>
+                    <param id="1" name="Value">350</param>
+                </action>
+                <action id="0" name="Add key" sid="268293811410065" type="dic_Player_Charectristics">
+                    <param id="0" name="Key">&quot;Player_Acceleration&quot;</param>
+                    <param id="1" name="Value">4000</param>
+                </action>
+                <action id="0" name="Add key" sid="595198024945012" type="dic_Player_Charectristics">
+                    <param id="0" name="Key">&quot;Player_Deceleration&quot;</param>
+                    <param id="1" name="Value">1000</param>
+                </action>
+                <action id="0" name="Add key" sid="370682484093134" type="dic_Player_Charectristics">
+                    <param id="0" name="Key">&quot;Player_Sneaking&quot;</param>
+                    <param id="1" name="Value">180</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

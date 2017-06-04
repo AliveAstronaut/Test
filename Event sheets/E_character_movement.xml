@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>E_character_movement</name>
+    <events>
+        <variable constant="0" name="Player_Speed_Sneeking_Multiplicator" sid="667068621036396" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Speed_Sneaking" sid="216052096666588" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Speed_instance" sid="767516448589323" static="0" type="number">0</variable>
+        <variable constant="0" name="Player_Speed_Dash" sid="981552038152589" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Acceleration_Multiplicator" sid="822841849537972" static="0" type="number">1</variable>
+        <variable constant="0" name="World_Speed" sid="244430869599944" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Speed_Multiplicator" sid="195946748215928" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Speed_Shift" sid="473628592141413" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Speed_Acceleration" sid="369610028419373" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Speed_Deceleration" sid="721999631681648" static="0" type="number">1</variable>
+        <variable constant="0" name="Player_Speed" sid="564998143331563" static="0" type="number">1</variable>
+        <event-block sid="498039238795146">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="784936425795797" type="System" />
+            </conditions>
+            <actions>
+                <action id="-16" name="Wait" sid="774570429237057" type="System">
+                    <param id="0" name="Seconds">0.1</param>
+                </action>
+                <action id="-9" name="Set value" sid="596152081468040" type="System">
+                    <param id="0" name="Variable">Player_Speed</param>
+                    <param id="1" name="Value">dic_Player_Charectristics.Get(&quot;Player_Speed&quot;)</param>
+                </action>
+                <action id="-9" name="Set value" sid="126271898198542" type="System">
+                    <param id="0" name="Variable">Player_Speed_Deceleration</param>
+                    <param id="1" name="Value">dic_Player_Charectristics.Get(&quot;Player_Deceleration&quot;)</param>
+                </action>
+                <action id="-9" name="Set value" sid="792366993699966" type="System">
+                    <param id="0" name="Variable">Player_Speed_Acceleration</param>
+                    <param id="1" name="Value">dic_Player_Charectristics.Get(&quot;Player_Acceleration&quot;)</param>
+                </action>
+                <action id="-9" name="Set value" sid="849719607492817" type="System">
+                    <param id="0" name="Variable">Player_Speed_Sneaking</param>
+                    <param id="1" name="Value">dic_Player_Charectristics.Get(&quot;Player_Sneaking&quot;)</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="834925229646031">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="464460456565029" type="System" />
+            </conditions>
+            <actions>
+                <action id="-12" name="Subtract from" sid="211800125155980" type="obj_Player">
+                    <param id="0" name="Instance variable">DashCooldown</param>
+                    <param id="1" name="Value">dt * World_Speed</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="791785801960323">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="906840754299094" type="System" />
+            </conditions>
+            <actions>
+                <action id="-4" name="Set position to another object" sid="533704041524034" type="txtr_Player">
+                    <param id="0" name="Object">obj_Player</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+                <action id="-22" name="Set angle toward position" sid="104871989433945" type="txtr_Player">
+                    <param id="0" name="X">tech_Mouse.X</param>
+                    <param id="1" name="Y">tech_Mouse.Y</param>
+                </action>
+                <action behavior="8Direction" id="4" name="Set max speed" sid="530763808487040" type="obj_Player">
+                    <param id="0" name="Max Speed">Player_Speed * Player_Speed_Multiplicator</param>
+                </action>
+                <action behavior="8Direction" id="5" name="Set acceleration" sid="653153606975879" type="obj_Player">
+                    <param id="0" name="Acceleration">Player_Speed_Acceleration * Player_Acceleration_Multiplicator</param>
+                </action>
+                <action behavior="8Direction" id="6" name="Set deceleration" sid="240011467560804" type="obj_Player">
+                    <param id="0" name="Deceleration">Player_Speed_Deceleration * Player_Acceleration_Multiplicator</param>
+                </action>
+                <action id="-9" name="Set value" sid="710478945029864" type="System">
+                    <param id="0" name="Variable">Player_Speed_Multiplicator</param>
+                    <param id="1" name="Value">World_Speed * Player_Speed_Shift * Player_Speed_Dash * Player_Speed_Sneeking_Multiplicator</param>
+                </action>
+                <action id="-9" name="Set value" sid="504152681718470" type="System">
+                    <param id="0" name="Variable">Player_Speed_instance</param>
+                    <param id="1" name="Value">obj_Player.8Direction.Speed</param>
+                </action>
+            </actions>
+            <sub-events>
+                <comment>StandStatus</comment>
+                <event-block sid="758547104278154">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="762507842219612" type="System">
+                            <param id="0" name="Interval (seconds)">dt</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="240748589050073">
+                            <conditions>
+                                <condition behavior="8Direction" id="0" name="Is moving" sid="257643773064988" type="obj_Player" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="554105330712122" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_StandQ</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="951082859497853">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="807448464737986" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="147716086472943" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_StandQ</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>UpMovement</comment>
+                <event-block sid="640159685820265">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="783414227933672" type="tech_Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="414392281484281" type="obj_Player">
+                            <param id="0" name="Control">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>DownMovement</comment>
+                <event-block sid="425843493176199">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="873475658200575" type="tech_Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="117757728272124" type="obj_Player">
+                            <param id="0" name="Control">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>LeftMovement</comment>
+                <event-block sid="139034732743028">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="252753299629574" type="tech_Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="741562097582690" type="obj_Player">
+                            <param id="0" name="Control">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>RightMovement</comment>
+                <event-block sid="229139219396791">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="338370091268679" type="tech_Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="367301400684036" type="obj_Player">
+                            <param id="0" name="Control">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>SpeedUpMovement</comment>
+                <event-block sid="972509755233608">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="859247777452172" type="tech_Keyboard">
+                            <param id="0" name="Key">16 (Shift)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="371087000904579" type="System">
+                            <param id="0" name="Variable">Player_Speed_Shift</param>
+                            <param id="1" name="Value">2.4</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="210611323251285">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="575894022000656" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_SneakQ</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="225401229869520" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_RunQ</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="390705548140274">
+                    <conditions>
+                        <condition id="2" inverted="1" name="Key is down" sid="363938716214302" type="tech_Keyboard">
+                            <param id="0" name="Key">16 (Shift)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="345517765408186" type="System">
+                            <param id="0" name="Variable">Player_Speed_Shift</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="547013171302321" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_RunQ</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Dash Movement</comment>
+                <event-block sid="830587700384267">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="925025126276570" type="tech_Keyboard">
+                            <param id="0" name="Key">32 (Space)</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="866788757264982" type="obj_Player">
+                            <param id="0" name="Instance variable">DashCooldown</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="174061392213691" type="System">
+                            <param id="0" name="Variable">Player_Acceleration_Multiplicator</param>
+                            <param id="1" name="Value">120</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="915350431854033" type="System">
+                            <param id="0" name="Variable">Player_Speed_Dash</param>
+                            <param id="1" name="Value">120</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="107481669398570" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_DashQ</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="186896973859309" type="System">
+                            <param id="0" name="Seconds">4*dt * World_Speed</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="332780723665863" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_DashQ</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="200807158110551" type="System">
+                            <param id="0" name="Variable">Player_Acceleration_Multiplicator</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="583569232864413" type="System">
+                            <param id="0" name="Variable">Player_Speed_Dash</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="558783484800014" type="obj_Player">
+                            <param id="0" name="Instance variable">DashCooldown</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="501945358986081">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="947061223864291" type="tech_Keyboard">
+                            <param id="0" name="Key">17 (Ctrl)</param>
+                        </condition>
+                        <condition behavior="8Direction" id="1" name="Compare speed" sid="856369643756302" type="obj_Player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Speed">dic_Player_Charectristics.Get(&quot;Player_Sneaking&quot;)* World_Speed</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="868676013903285" type="System">
+                            <param id="0" name="Variable">Player_Speed_Sneeking_Multiplicator</param>
+                            <param id="1" name="Value">(dic_Player_Charectristics.Get(&quot;Player_Sneaking&quot;) * World_Speed) / obj_Player.8Direction.Speed</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="652584079641631" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_SneakQ</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="939647999190182">
+                    <conditions>
+                        <condition id="2" inverted="1" name="Key is down" sid="455546222561861" type="tech_Keyboard">
+                            <param id="0" name="Key">17 (Ctrl)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="432450637104604" type="System">
+                            <param id="0" name="Variable">Player_Speed_Sneeking_Multiplicator</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="820498636633417" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_SneakQ</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="933609053655704">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="243911001189282" type="System">
+                    <param id="0" name="Interval (seconds)">dt</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block any="1" sid="904227188878644">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="968194710245139" type="tech_Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="434625078245069" type="tech_Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="493527276931627" type="tech_Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="939067181946734" type="tech_Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="759473894096381">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="283514687388844" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_RunQ</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="182873498058771" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_DashQ</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="522987387879191" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_SneakQ</param>
+                                </condition>
+                                <condition id="2" inverted="1" name="Key is down" sid="886541718662018" type="tech_Keyboard">
+                                    <param id="0" name="Key">17 (Ctrl)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="658403165726978" type="obj_Player">
+                                    <param id="0" name="Instance variable">Status_WalkQ</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="501462708294467">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="948831870486617" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-13" name="Set boolean" sid="532284905317036" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_WalkQ</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+    </events>
+</c2eventsheet>

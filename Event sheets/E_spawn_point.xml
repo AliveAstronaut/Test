@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>E_spawn_point</name>
+    <events>
+        <event-block sid="491552820305448">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="377321778463416" type="System" />
+            </conditions>
+            <actions>
+                <action id="-4" name="Set position to another object" sid="231732758914157" type="obj_Player">
+                    <param id="0" name="Object">trgr_Player_Spawn_Point</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

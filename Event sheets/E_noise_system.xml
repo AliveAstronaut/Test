@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>E_noise_system</name>
+    <events>
+        <variable constant="0" name="Player_Noise_Level" sid="318350388599730" static="0" type="number">100</variable>
+        <variable constant="0" name="Player_Noise_Level_Multiplicator" sid="712714026982151" static="0" type="number">1</variable>
+        <event-block sid="276712962304900">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="112204108347946" type="System" />
+            </conditions>
+            <actions>
+                <action id="-4" name="Set position to another object" sid="940737592969823" type="trgr_Player_Noise">
+                    <param id="0" name="Object">obj_Player</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+                <action id="-7" name="Set size" sid="225214072790472" type="trgr_Player_Noise">
+                    <param id="0" name="Width">Player_noise_level</param>
+                    <param id="1" name="Height">Player_noise_level</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="468799522434690">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="944659625296781" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_StandQ</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="789030232789981" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Value">0 * Player_Noise_Level_Multiplicator</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="581237514327257">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="809254614520080" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_SneakQ</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="713808594412701" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">50</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="665931710195315" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">180</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="776491816816568" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Value">(180 - Player_Noise_Level) * Player_Noise_Level_Multiplicator</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="193061069661668">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="259186817508152" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_WalkQ</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="651658737402967" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">50</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="171368922235770" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">300</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="825258552907629" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Value">(300 - Player_Noise_Level) * Player_Noise_Level_Multiplicator</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="706096203241712">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="511550171210624" type="obj_Player">
+                            <param id="0" name="Instance variable">Status_RunQ</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="511898203633823" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">50</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="443032384268848" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">500</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="968647379707464" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Value">(500 - Player_Noise_Level) *  Player_Noise_Level_Multiplicator</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="993555146382212">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="956619999864774" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Subtract from" sid="918813254896388" type="System">
+                            <param id="0" name="Variable">Player_Noise_Level</param>
+                            <param id="1" name="Value">dt* (120 + Player_Noise_Level/2)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+    </events>
+</c2eventsheet>
